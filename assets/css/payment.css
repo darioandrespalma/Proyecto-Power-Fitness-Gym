@@ -1,0 +1,67 @@
+/* Estilos específicos para la página de pago */
+
+.payment-section {
+    padding: 3rem 0;
+    background-color: var(--bg-light);
+}
+
+.payment-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.payment-form {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.order-summary {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 100px;
+    align-self: start;
+}
+
+.summary-item {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.summary-item h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.summary-total {
+    padding: 1rem 0;
+    border-top: 2px solid var(--border-color);
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.security-info {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.security-info p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.security-info p:before {
+    content: "🔒";
+    margin-right: 0.5rem;
+}
