@@ -1,52 +1,35 @@
 <?php
-require_once '../includes/database.php';
+require_once '../includes/database.php'; // Carga config.php (inicia sesión) y la conexión PDO
 require_once '../includes/functions.php';
+require_once '../includes/auth.php'; // Carga las nuevas funciones de autenticación
+
+$error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $email = sanitizeInput($_POST['email']);
-        $password = $_POST['password'];
-        $redirect_url = isset($_POST['redirect']) ? $_POST['redirect'] : '../pages/member-dashboard.php';
-        
-        if (empty($email) || empty($password)) {
-            throw new Exception('Por favor completa todos los campos');
-        }
-        
-        // Validar email
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception('Email inválido');
-        }
-        
-        // Buscar usuario
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? AND status = 'active'");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
-        
-        if ($user && verifyPassword($password, $user['password'])) {
-            // Iniciar sesión
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['name'];
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_role'] = $user['role'];
-            
-            // Regenerar ID de sesión para seguridad
-            session_regenerate_id(true);
-            
-            // Redirigir según rol
-            if ($user['role'] === 'admin') {
+    $email = sanitizeInput($_POST['email']);
+    $password = $_POST['password'];
+
+    if (empty($email) || empty($password)) {
+        $error_message = "Por favor, ingresa tu correo y contraseña.";
+    } else {
+        // Llama a la función centralizada de login
+        if (loginUser($pdo, $email, $password)) {
+            // La función loginUser ya guarda los datos en la sesión
+            if (getUserRole() === 'admin') {
                 redirect('../admin/dashboard.php');
             } else {
-                redirect($redirect_url);
+                redirect('../pages/profile.php'); // O a la página de perfil del miembro
             }
         } else {
-            throw new Exception('Credenciales incorrectas');
+            $error_message = "Credenciales incorrectas o cuenta inactiva.";
         }
-        
-    } catch (Exception $e) {
-        $_SESSION['login_error'] = $e->getMessage();
-        redirect('../login.php');
     }
-} else {
+}
+
+// Si hay un error, redirigir de vuelta al formulario de login con un mensaje
+if (!empty($error_message)) {
+    // Puedes usar sesiones para pasar el mensaje de error de forma segura
+    $_SESSION['login_error'] = $error_message;
     redirect('../login.php');
 }
 ?>

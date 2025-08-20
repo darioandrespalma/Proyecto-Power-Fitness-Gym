@@ -213,3 +213,14 @@ INSERT INTO settings (setting_key, setting_value, description) VALUES
 -- password = "password" (hash: $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi)
 -- En producción, usa password_hash() con PASSWORD_DEFAULT
 -- Ejemplo: password_hash('tu_contraseña', PASSWORD_DEFAULT)
+
+
+
+
+-- Modificar la tabla payments para permitir NULL en user_id
+ALTER TABLE payments MODIFY user_id INT NULL;
+
+-- Actualizar la clave foránea
+ALTER TABLE payments DROP FOREIGN KEY payments_ibfk_1;
+ALTER TABLE payments ADD CONSTRAINT payments_ibfk_1 
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL;
