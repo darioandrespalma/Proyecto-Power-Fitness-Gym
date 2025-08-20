@@ -257,6 +257,104 @@ header {
     margin-bottom: 1rem;
 }
 
+
+/* =============================================
+   ESTILOS PARA LA SECCIÓN DE PLANES DESTACADOS
+   ============================================= */
+
+/* Contenedor principal de la sección */
+.plans-preview {
+    padding: 5rem 0;
+    background-color: var(--bg-white); /* Fondo blanco para contrastar */
+    text-align: center;
+}
+
+.plans-preview h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+/* Rejilla para las tarjetas de planes */
+.plans-grid {
+    display: grid;
+    /* Crea 3 columnas en escritorio y se adapta a menos en móvil */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Estilo individual de cada tarjeta de plan */
+.plan-card {
+    background: var(--bg-light); /* Fondo gris claro para la tarjeta */
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Clave para alinear el botón abajo */
+}
+
+.plan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Nombre del plan */
+.plan-card h3 {
+    font-size: 1.75rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+/* Precio del plan */
+.plan-card .price {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+/* Descripción del plan */
+.plan-card p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Empuja el contenido de abajo (botón) hacia el final */
+}
+
+/* Lista de características del plan */
+.plan-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+    text-align: left; /* Alinea las características a la izquierda para mejor lectura */
+}
+
+.plan-card ul li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.plan-card ul li:last-child {
+    border-bottom: none;
+}
+
+/* Ícono de check para las características */
+.plan-card ul li::before {
+    content: "✓";
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Botón del plan (ya hereda estilos de .btn, pero podemos asegurar el margen) */
+.plan-card .btn {
+    margin-top: auto; /* Se asegura que el botón se alinee al fondo */
+}
+
+
 /* Footer */
 footer {
     background-color: var(--bg-dark);

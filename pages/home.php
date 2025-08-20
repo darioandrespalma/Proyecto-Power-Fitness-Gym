@@ -60,7 +60,7 @@ $gym_address = getSetting('gym_address', 'Av. Deportiva 123, Ciudad Fitness');
 
     <!-- Planes Destacados -->
     <section class="plans-preview">
-        <div class="container">
+        <div class="container1">
             <h2>Nuestros Planes</h2>
             <div class="plans-grid">
                 <?php
